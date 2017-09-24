@@ -1,4 +1,4 @@
-require 'spec_helper'
+require './spec_helper'
 
 RSpec.describe '06: Everything together' do
   # The code for this test lives in lib/surveyor/survey.rb
