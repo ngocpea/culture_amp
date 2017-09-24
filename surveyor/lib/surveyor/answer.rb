@@ -15,12 +15,14 @@ module Surveyor
     def valid?
 
       if @question != nil && @value != nil
-	if (@value <= 5)
-          return true
-        else
+  	if @question.type == 'free_text'
+	  return true
+	elsif @value <= 5
+ 	  return true
+	else
 	  return false
+        end
       end
     end
-   end
-end
+  end
 end
