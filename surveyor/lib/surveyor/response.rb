@@ -1,5 +1,13 @@
+#!/usr/bin/ruby
+
 module Surveyor
   class Response
-    # your code goes here
+    attr_reader :user, :answers
+
+    def initialize params
+      @user = params[:user]
+      @answers = []
+    end   
+
   end
 end

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require './spec_helper'
 
 RSpec.describe Surveyor::Response, '04: Response' do
   # The code for this test lives in lib/surveyor/answer.rb
