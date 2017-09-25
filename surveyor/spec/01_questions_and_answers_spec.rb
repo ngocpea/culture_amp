@@ -1,4 +1,4 @@
-require './spec_helper'
+require 'spec_helper'
 
 RSpec.describe '01: Questions and Answers' do
   class Response
