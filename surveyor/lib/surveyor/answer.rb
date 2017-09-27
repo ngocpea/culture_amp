@@ -1,28 +1,19 @@
 #!/usr/bin/ruby
-require_relative './question.rb'
-
 
 module Surveyor
   class Answer
-    
     attr_reader :question, :value
 
-    def initialize params
-     @question = params[:question]
-     @value = params[:value]
-    end    
-    
-    def valid?
+    def initialize(params)
+      @question = params[:question]
+      @value = params[:value]
+    end
 
-      if @question != nil && @value != nil
-  	if @question.type == 'free_text'
-	  return true
-	elsif @value <= 5
- 	  return true
-	else
-	  return false
-        end
+    def valid?
+      if @question.nil? && @value.nil? && @question.type == 'free_text' && @value <= 5
+        true
       end
+      false
     end
   end
 end
