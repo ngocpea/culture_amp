@@ -18,8 +18,8 @@ module Surveyor
       the_rating = {}
       (1..5).each { |rating_value| the_rating[rating_value] = 0 }
 
-      responses.each do
-        answer.each do
+      for response in @responses do
+        for answer in response.answers do
           if answer.question == question
             the_rating[answer.value] += 1
           end
