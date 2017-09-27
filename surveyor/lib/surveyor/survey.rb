@@ -17,7 +17,9 @@ module Surveyor
     def ratings(question)
       the_rating = {}
       (1..5).each { |rating_value| the_rating[rating_value] = 0 }
-
+      
+      # rubocop suggested using each instead of for however I did have trouble working through a mutlidimensional array so kept
+      # the for loops to make the tests pass.
       for response in @responses do
         for answer in response.answers do
           if answer.question == question
