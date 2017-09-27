@@ -7,14 +7,14 @@ RSpec.describe '06: Everything together' do
   let(:question_1) do
     Surveyor::Question.new(
       title: 'Do you feel supported by your manager?',
-      type: 'rating',
+      type: 'rating'
     )
   end
 
   let(:question_2) do
     Surveyor::Question.new(
       title: 'Do you feel like the work you do is meaningful?',
-      type: 'rating',
+      type: 'rating'
     )
   end
 

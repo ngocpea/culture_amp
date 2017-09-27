@@ -12,5 +12,3 @@ RSpec.describe Surveyor::Question, '02: Questions' do
     expect(question.type).to eq('rating')
   end
 end
-
-
