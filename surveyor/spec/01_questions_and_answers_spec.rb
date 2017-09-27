@@ -2,57 +2,41 @@ require 'spec_helper'
 
 RSpec.describe '01: Questions and Answers' do
   class Response
+    # if there are any responses by a particular user
     def self.answered?(responses, user, question)
       responses.any? { |item| item[:user] == user && item[:answers].key?(question) }
     end
 
+    # retrieves answer for question by user
     def self.answer_for_question_by_user(responses, question, user)
-       has_been_answered = self.answered?(responses, user, question)
-       if (has_been_answered) 
-	 the_user = responses.first { |item| item[:user] == user }
-	 the_user[:answers][question]
-	else
-	 nil
-     end
-#     Loop variation
-#       for item in responses 
-#	  if (item[:user] == user)
-#	    return item[:answers][question]
-#	  end 
-#	end 
-#
-#        return nil
-#      else
-#   	 return nil
-#      end
-#    end
+      has_been_answered = answered?(responses, user, question)
+      if has_been_answered
+        the_user = responses.first { |item| item[:user] == user }
+        the_user[:answers][question]
+      else
+        nil
+      end
     end
 
+    # calculates response average for certain question
     def self.question_average(responses, question)
-      filter = responses.select { |item| item[:answers].key?(question) } 
-      sum = filter.inject(0.0) { |sum, el| sum + el[:answers][question]}
-      return  ave = ( sum / filter.size ).round(2)
-#    sum = 0.0
-#    len = responses.size
-#    for item in responses
-#      sum += item[:answers][question].to_f
-#    end
-#      return ( sum / len ) 
+      filter = responses.select { |item| item[:answers].key?(question) }
+      add = filter.inject(0.0) { |sum, el| sum + el[:answers][question] }
+      (add/filter.size).round(2)
     end
 
+    # percentage for total participation
     def self.question_participation_percentage(responses, question)
-     total_count = responses.count
-     total_count_answered = responses.count { |item| item[:answers].key?(question) }
-     percentage = ((total_count_answered.to_f / total_count)*100).round(2)
-
-# one liner
-# (((responses.count { |item| item[:answers].key?(question) }).to_f / responses.size ) *100).round(2)
+      total_count = responses.count
+      total_count_answered = responses.count { |item| item[:answers].key?(question) }
+      ((total_count_answered.to_f/total_count)*100).round(2)
     end
 
+    # percentage for overall participation
     def self.overall_participation_percentage(responses)
       total_count = responses.count
       total_count_answered = responses.count { |item| item[:answers].keys.length > 0 }
-      return (( total_count_answered.to_f / total_count ) * 100).round(2)
+      ((total_count_answered.to_f/total_count)*100).round(2)
     end
   end
 
