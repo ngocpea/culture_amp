@@ -1,43 +1,48 @@
-require 'spec_helper'
+require './spec_helper'
 
 RSpec.describe '00: Respondent Answers' do
   class Response
+    # method to count number of responses in array
     def self.count(responses)
       responses.count
     end
 
+    # iterate through array, return answer if user matches, otherwise return nil
     def self.for(responses, user)
-     for response in responses 
-	if response[:user] == user
-	  return response
+      responses.each do |response|
+        if response[:user] == user
+          return response
+        end
+      end
+      nil
+    end
+
+    # checks to see if user has answered by looking through array
+    def self.present?(responses, user)
+      responses.any? { |item| item[:user] == user }
+    end
+
+    # finds answers and returns answers greater than 3
+    def self.positive(responses)
+      responses.each do
+        return responses.count { |item| item[:answer] > 3 }
       end
     end
-    return nil
-    end
 
-    def self.present?(responses, user)
-      responses.any? {|item| item[:user] == user}
-    end
-
-    def self.positive(responses)
-      for item in responses
-        return responses.count { |item| item[:answer] > 3 }
-      end	
-    end
-
+    # finds answers and returns answers less than 3
     def self.negative(responses)
-      for item in responses
+      responses.each do
         return responses.count { |item| item[:answer] < 3 }
       end
     end
 
+    # calculates average by finding array length and performing sum of answers
     def self.average(responses)
       sum = 0
       len = responses.length
-      for item in responses do
-        sum += item[:answer]
-      end
-	return ( sum.to_f / len )
+      responses.each { |item| sum += item[:answer] }
+      # to_f to ensure value is a float, also to ensure the tests pass
+      (sum.to_f/len)
     end
   end
 
