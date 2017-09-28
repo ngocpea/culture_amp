@@ -28,4 +28,6 @@ Logic points:
 Challenges: 
 - To make code as dynamic as possible rather than hardcoding which was my initial approach which would mean the tests would fail if the requirements changed slightly. 
 - Logiacal thinking > definitely needs to be practiced. 
-
+---
+Finished in 0.01318 seconds
+38 examples, 0 failures. 
